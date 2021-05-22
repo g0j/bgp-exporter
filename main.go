@@ -11,7 +11,7 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-func bgpThread(cfg *exporter.Config) {
+func bgpThread(cfg *Config) {
 	l, err := net.Listen("tcp", cfg.ListenAddr+":"+exporter.BGP_TCP_PORT)
 	if err != nil {
 		log.Fatal("Error listening:", err.Error())
@@ -31,7 +31,7 @@ func bgpThread(cfg *exporter.Config) {
 }
 
 func main() {
-	cfg := exporter.NewConfig(false)
+	cfg := configure()
 	log.SetFormatter(&log.TextFormatter{FullTimestamp: true})
 	log.SetLevel(cfg.LogLevel)
 	log.Info("App Starting")
